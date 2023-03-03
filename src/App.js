@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
+import Result from './components/ResultsContainer/Results';
+import SearchBox from './components/SearchBox/SearchBox';
+
+const name = require('@rstacruz/startup-name-generator');
 
 function App() {
+  const [headerExpanded, setHeaderExpanded] = useState(true);
+  const [text, setText] = useState([]);
+
+  const handleChange = (userText) => {
+    setText(userText.length > 0 ? name(userText) : []);
+    setHeaderExpanded(!userText);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header headerExpanded={headerExpanded} />
+      <SearchBox onInputChange={handleChange} />
+      <Result suggestedNames={text} />
     </div>
   );
 }
 
 export default App;
+
+// class App extends React.Component {
+//   constructor() {
+//     super();
+
+//     this.state = {
+//       headerText: 'Name It!',
+//       headerExpanded: true,
+//     };
+//   }
+
+//   handleChange = (userText) => {
+//     this.setState({ headerExpanded: !userText });
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <Header
+//           headerExpanded={this.state.headerExpanded}
+//           headerTitle={this.state.headerText}
+//         />
+//         <SearchBox onInputChange={this.handleChange} />
+//       </div>
+//     );
+//   }
+// }
