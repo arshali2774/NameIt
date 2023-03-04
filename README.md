@@ -1,6 +1,7 @@
 # Name It
 
 A very cooooooool project!!
+Visit the website on github pages https://arshali2774.github.io/NameIt
 
 ## Resources
 
